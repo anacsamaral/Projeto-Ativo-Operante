@@ -17,14 +17,17 @@ public class Denuncia {
     private String texto;
     @Column(name = "den_urgencia")
     private int urgencia;
+    @Column(name = "den_data")
+    private LocalDateTime data;
+
     @OneToOne
     @JoinColumn(name = "org_id")
     private Orgao orgao;
-    @Column(name = "den_data")
-    private LocalDateTime data;
+
     @OneToOne
     @JoinColumn(name = "tip_id")
     private Tipo tipo;
+
     @OneToOne
     @JoinColumn(name = "usu_id")
     private Usuario usuario;

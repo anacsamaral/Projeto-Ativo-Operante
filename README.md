@@ -19,7 +19,7 @@ O projeto foi dividido em 5 fases principais de desenvolvimento:
 ### Fase 1: Persistência de Dados
 - [x] Definição e criação da base de dados.
 - [x] Mapeamento das entidades.
-- [ ] Criação dos repositórios JPA.
+- [x] Criação dos repositórios JPA.
 
 ### Fase 2: Backend & API Rest (Filtros e Segurança)
 As APIs estão divididas por perfis de acesso:
