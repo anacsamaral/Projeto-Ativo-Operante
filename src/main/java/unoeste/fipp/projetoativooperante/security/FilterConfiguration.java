@@ -30,8 +30,8 @@ public class FilterConfiguration {
         FilterRegistrationBean <AccessFilter>register = new FilterRegistrationBean();
         register.setFilter(new AccessFilter());
         //coloque todas as rotas que devem ser analisadas pelo filtro de acesso
-        register.addUrlPatterns("/apís/adm/*");
-        register.addUrlPatterns("/apís/guest/*");
+        register.addUrlPatterns("/apis/adm/*");
+        register.addUrlPatterns("/apis/cidadao/*");
         register.setOrder(1);
         return register;
     }

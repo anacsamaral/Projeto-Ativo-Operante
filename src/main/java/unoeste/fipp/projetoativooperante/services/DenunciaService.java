@@ -12,6 +12,7 @@ import java.util.List;
 public class DenunciaService {
     @Autowired
     DenunciaRepository denunciaRepository;
+    // save, delete, findOne, findAll - PARA TODOS OS SERVICES
 
     public List<Denuncia> listarTodasDenuncias(){
         List<Denuncia> denunciaList = denunciaRepository.findAll();

@@ -20,17 +20,21 @@ public class Denuncia {
     @Column(name = "den_data")
     private LocalDateTime data;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id")
     private Orgao orgao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tip_id")
     private Tipo tipo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fee_id")
+    private Feedback feedback;
 
     public Denuncia() {
         this(0L,"","",0,null,null,null,null);
