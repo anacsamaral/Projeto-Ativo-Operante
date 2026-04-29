@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.service;
+package unoeste.fipp.projetoativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +20,14 @@ public class UsuarioService {
     public boolean verificarEmail(String email){
         Usuario usuarioEncontrado = usuarioRepository.findByEmail(email);
         return usuarioEncontrado == null;
+    }
+
+    public Usuario salvarUsuario(Usuario novoUsuario){
+        if(verificarEmail(novoUsuario.getEmail())){
+            novoUsuario.setNivel("cidadão");
+            novoUsuario = usuarioRepository.save(novoUsuario);
+            return novoUsuario;
+        }
+        return null;
     }
 }
