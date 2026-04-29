@@ -1,7 +1,6 @@
 package unoeste.fipp.projetoativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import unoeste.fipp.projetoativooperante.entities.Denuncia;
 import unoeste.fipp.projetoativooperante.repositories.DenunciaRepository;
@@ -14,7 +13,7 @@ public class DenunciaService {
     @Autowired
     DenunciaRepository denunciaRepository;
 
-    public List<Denuncia> buscarTodasDenuncias(){
+    public List<Denuncia> listarTodasDenuncias(){
         List<Denuncia> denunciaList = denunciaRepository.findAll();
         return denunciaList;
     }
@@ -23,9 +22,17 @@ public class DenunciaService {
         return denunciaRepository.findById(id).orElse(null);
     }
 
-    public Denuncia salvarDenuncia(Denuncia novaDenuncia){
+    public Denuncia inserirDenuncia(Denuncia novaDenuncia){
         novaDenuncia.setData(LocalDateTime.now());
         novaDenuncia = denunciaRepository.save(novaDenuncia);
         return novaDenuncia;
+    }
+
+    public boolean apagarDenuncia(Long id){
+        if(buscarPorId(id) != null){
+            denunciaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

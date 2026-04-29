@@ -20,24 +20,32 @@ public class DenunciaRestController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> buscarDenuncia(@PathVariable Long id){
+        Denuncia denuncia = denunciaService.buscarPorId(id);
+        return ResponseEntity.ok().body(denuncia);
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> listarDenuncias(){
+        List<Denuncia> denunciaList = denunciaService.listarTodasDenuncias();
+        return ResponseEntity.ok().body(denunciaList);
+    }
+
     @PostMapping
     public ResponseEntity<Object> adicionarDenuncia(@RequestBody Denuncia denuncia){
-        denuncia = denunciaService.salvarDenuncia(denuncia);
+        denuncia = denunciaService.inserirDenuncia(denuncia);
         if(denuncia != null)
             return ResponseEntity.status(HttpStatus.CREATED).body(denuncia);
         else
             return ResponseEntity.badRequest().body(new Erro("Erro ao cadastrar denúncia"));
     }
 
-    @GetMapping
-    public ResponseEntity<Object> listarDenuncias(){
-        List<Denuncia> denunciaList = denunciaService.buscarTodasDenuncias();
-        return ResponseEntity.ok().body(denunciaList);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarDenuncia(@PathVariable Long id){
-        Denuncia denuncia = denunciaService.buscarPorId(id);
-        return ResponseEntity.ok().body(denuncia);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> removerDenuncia(@PathVariable Long id){
+        if(denunciaService.apagarDenuncia(id))
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao remover o denuncia"));
     }
 }
