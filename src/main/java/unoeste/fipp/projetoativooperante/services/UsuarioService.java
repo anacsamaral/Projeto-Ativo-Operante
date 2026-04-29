@@ -24,7 +24,7 @@ public class UsuarioService {
 
     public Usuario salvarUsuario(Usuario novoUsuario){
         if(verificarEmail(novoUsuario.getEmail())){
-            novoUsuario.setNivel("cidadão");
+            novoUsuario.setNivel(1);
             novoUsuario = usuarioRepository.save(novoUsuario);
             return novoUsuario;
         }

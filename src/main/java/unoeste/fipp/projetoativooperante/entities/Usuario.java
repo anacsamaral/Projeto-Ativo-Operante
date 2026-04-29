@@ -10,19 +10,19 @@ public class Usuario {
     @Column(name = "usu_id")
     private Long id;
     @Column(name = "usu_cpf")
-    private String cpf;
+    private int cpf;
     @Column(name = "usu_email")
     private String email;
     @Column(name = "usu_senha")
-    private String senha;
+    private int senha;
     @Column(name = "usu_nivel")
-    private String nivel;
+    private int nivel;
 
     public Usuario() {
-        this(0L, "", "","","");
+        this(0L, 0, "",0,1);
     }
 
-    public Usuario(Long id, String cpf, String email, String senha, String nivel) {
+    public Usuario(Long id, int cpf, String email, int senha, int nivel) {
         this.id = id;
         this.cpf = cpf;
         this.email = email;
@@ -30,7 +30,7 @@ public class Usuario {
         this.nivel = nivel;
     }
 
-    public Usuario(String cpf, String email, String senha, String nivel) {
+    public Usuario(int cpf, String email, int senha, int nivel) {
         this(0L, cpf, email, senha, nivel);
     }
 
@@ -42,11 +42,11 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getCpf() {
+    public int getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(int cpf) {
         this.cpf = cpf;
     }
 
@@ -58,19 +58,19 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(int senha) {
         this.senha = senha;
     }
 
-    public String getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
-    public void setNivel(String nivel) {
+    public void setNivel(int nivel) {
         this.nivel = nivel;
     }
 
