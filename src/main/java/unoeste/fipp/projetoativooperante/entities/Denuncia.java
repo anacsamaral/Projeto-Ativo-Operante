@@ -20,15 +20,15 @@ public class Denuncia {
     @Column(name = "den_data")
     private LocalDateTime data;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "org_id")
     private Orgao orgao;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tip_id")
     private Tipo tipo;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
 
