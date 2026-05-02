@@ -22,9 +22,9 @@ public class UsuarioService {
         return usuarioEncontrado == null;
     }
 
-    public Usuario salvarUsuario(Usuario novoUsuario){
+    public Usuario inserirUsuario(Usuario novoUsuario){
         if(verificarEmail(novoUsuario.getEmail())){
-            novoUsuario.setNivel(1);
+            novoUsuario.setNivel(2);
             novoUsuario = usuarioRepository.save(novoUsuario);
             return novoUsuario;
         }

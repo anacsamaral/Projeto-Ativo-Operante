@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import unoeste.fipp.projetoativooperante.entities.Denuncia;
-import unoeste.fipp.projetoativooperante.entities.Feedback;
+import unoeste.fipp.projetoativooperante.entities.*;
 import unoeste.fipp.projetoativooperante.security.JWTTokenProvider;
 import unoeste.fipp.projetoativooperante.services.DenunciaService;
+import unoeste.fipp.projetoativooperante.services.OrgaoService;
+import unoeste.fipp.projetoativooperante.services.TipoService;
+import unoeste.fipp.projetoativooperante.services.UsuarioService;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
@@ -24,6 +26,10 @@ public class CidadaoRestController {
     HttpServletRequest request;
     @Autowired
     DenunciaService denunciaService;
+    @Autowired
+    OrgaoService orgaoService;
+    @Autowired
+    TipoService tipoService;
 
     // LISTAR DENÚNICAS DE UM CIDADÃO ESPECÍFICO
     @GetMapping("/listar-denuncias/{id}")
@@ -41,18 +47,18 @@ public class CidadaoRestController {
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        List<Autor> autorList=autorService.buscarTodosAutores();
-        return ResponseEntity.ok(autorList);
+        List<Orgao> orgaoList=orgaoService.listarTodosOrgaos();
+        return ResponseEntity.ok(orgaoList);
     }
 
     // LISTAR TIPOS DE PROBLEMAS]
-    @GetMapping("/listar-tipos-problemas")
-    public ResponseEntity<Object> buscarOrgaos(){
+    @GetMapping("/listar-tipos")
+    public ResponseEntity<Object> buscarTipos(){
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        List<Autor> autorList=autorService.buscarTodosAutores();
-        return ResponseEntity.ok(autorList);
+        List<Tipo> tipoList=tipoService.listarTodosTipos();
+        return ResponseEntity.ok(tipoList);
     }
 
     // VISUALIZAR FEEDBACKS

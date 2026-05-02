@@ -10,7 +10,7 @@ public class Usuario {
     @Column(name = "usu_id")
     private Long id;
     @Column(name = "usu_cpf")
-    private int cpf;
+    private Long cpf;
     @Column(name = "usu_email")
     private String email;
     @Column(name = "usu_senha")
@@ -19,10 +19,10 @@ public class Usuario {
     private int nivel;
 
     public Usuario() {
-        this(0L, 0, "",0,1);
+        this(0L, 0L, "",0,1);
     }
 
-    public Usuario(Long id, int cpf, String email, int senha, int nivel) {
+    public Usuario(Long id, Long cpf, String email, int senha, int nivel) {
         this.id = id;
         this.cpf = cpf;
         this.email = email;
@@ -30,7 +30,7 @@ public class Usuario {
         this.nivel = nivel;
     }
 
-    public Usuario(int cpf, String email, int senha, int nivel) {
+    public Usuario(Long cpf, String email, int senha, int nivel) {
         this(0L, cpf, email, senha, nivel);
     }
 
@@ -42,11 +42,11 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 

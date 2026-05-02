@@ -11,5 +11,9 @@ import java.util.List;
 public class TipoService {
     @Autowired
     TipoRepository tipoRepository;
-    public List<Tipo> tipoList = tipoRepository.findAll();
+
+    public List<Tipo> listarTodosTipos(){
+        List<Tipo> tipoList = tipoRepository.findAll();
+        return tipoList;
+    }
 }
