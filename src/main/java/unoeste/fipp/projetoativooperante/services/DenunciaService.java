@@ -23,7 +23,7 @@ public class DenunciaService {
         return denunciaList;
     }
 
-    public List<Denuncia> listarDenunciasPorCidadao(Long id){
+    public List<Denuncia> listarDenunciasCidadao(Long id){
         List<Denuncia> denunciaList = denunciaRepository.findAll();
         return denunciaList;
     }

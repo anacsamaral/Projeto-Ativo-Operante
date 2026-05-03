@@ -13,9 +13,7 @@ import unoeste.fipp.projetoativooperante.security.JWTTokenProvider;
 import unoeste.fipp.projetoativooperante.services.DenunciaService;
 import unoeste.fipp.projetoativooperante.services.OrgaoService;
 import unoeste.fipp.projetoativooperante.services.TipoService;
-import unoeste.fipp.projetoativooperante.services.UsuarioService;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -51,7 +49,7 @@ public class CidadaoRestController {
         return ResponseEntity.ok(orgaoList);
     }
 
-    // LISTAR TIPOS DE PROBLEMAS]
+    // LISTAR TIPOS DE PROBLEMAS
     @GetMapping("/listar-tipos")
     public ResponseEntity<Object> buscarTipos(){
         String token=request.getHeader("Authorization");
@@ -63,11 +61,11 @@ public class CidadaoRestController {
 
     // VISUALIZAR FEEDBACKS
     @GetMapping("/listar-feedbacks")
-    public ResponseEntity<Object> buscarOrgaos(){
+    public ResponseEntity<Object> buscarFeedbacks(){
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        List<Feedback> feedbackList=denunciaService.buscarTodosFeedbacks();
-        return ResponseEntity.ok(autorList);
+        List<Feedback> feedbackList=denunciaService.listarTodosFeedbacks();
+        return ResponseEntity.ok(feedbackList);
     }
 }
