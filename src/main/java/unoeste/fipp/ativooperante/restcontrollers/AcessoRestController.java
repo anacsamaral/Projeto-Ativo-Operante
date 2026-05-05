@@ -18,8 +18,8 @@ public class AcessoRestController {
     // @PostMapping("logar")
     // endpoint logar
 
-    @PostMapping("cadastrar")
-    public ResponseEntity<Object> adicionar(@RequestBody Usuario usuario){
+    @PostMapping("/cadastrar")
+    public ResponseEntity<Object> adicionarUsuario(@RequestBody Usuario usuario){
         usuario=usuarioService.inserirUsuario(usuario);
         if(usuario!=null)
             return ResponseEntity.noContent().build();
