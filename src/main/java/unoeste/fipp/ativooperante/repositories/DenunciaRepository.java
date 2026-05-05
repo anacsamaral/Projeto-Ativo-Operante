@@ -9,9 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DenunciaRepository extends JpaRepository<Denuncia,Long> {
-    public List<Denuncia> findByUrgencia(int urgencia);
-
-    public List<Denuncia> findByOrgao(Orgao orgao);
-
-    public List<Denuncia> findByUrgenciaAndOrgao(int Urgencia, Orgao orgao);
+    public List<Denuncia> findByUsuarioId(Long id);
 }

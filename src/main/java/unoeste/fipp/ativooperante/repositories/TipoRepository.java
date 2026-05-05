@@ -10,7 +10,4 @@ import java.util.List;
 
 @Repository
 public interface TipoRepository extends JpaRepository<Tipo,Long> {
-
-    @Query(value = "SELECT * FROM autor WHERE upper(aut_nome) LIKE %:keyword%",nativeQuery = true)
-    public List<Tipo> findById(@Param("id") String id);
 }

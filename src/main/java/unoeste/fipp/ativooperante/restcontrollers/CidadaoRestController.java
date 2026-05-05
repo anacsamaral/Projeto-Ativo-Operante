@@ -55,6 +55,15 @@ public class CidadaoRestController {
         return ResponseEntity.ok(tipoList);
     }
 
+    @GetMapping("/listar-tipos/{nome}")
+    public ResponseEntity<Object> buscarTipoPorNome(@PathVariable String nome){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Tipo> tipoList=tipoService.listarTodosTipos();
+        return ResponseEntity.ok(tipoList);
+    }
+
     @GetMapping("/listar-feedbacks")
     public ResponseEntity<Object> buscarFeedbacks(){
         String token=request.getHeader("Authorization");
