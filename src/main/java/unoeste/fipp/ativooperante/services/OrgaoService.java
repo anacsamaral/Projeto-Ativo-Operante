@@ -1,12 +1,10 @@
-package unoeste.fipp.projetoativooperante.services;
+package unoeste.fipp.ativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unoeste.fipp.projetoativooperante.entities.Denuncia;
-import unoeste.fipp.projetoativooperante.entities.Orgao;
-import unoeste.fipp.projetoativooperante.repositories.OrgaoRepository;
+import unoeste.fipp.ativooperante.entities.Orgao;
+import unoeste.fipp.ativooperante.repositories.OrgaoRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,21 +17,16 @@ public class OrgaoService {
         return orgaoList;
     }
 
-    public List<Denuncia> listarDenunciasPorCidadao(Long id){
-        List<Denuncia> denunciaList = orgaoRepository.findAll();
-        return denunciaList;
-    }
-
-    public Denuncia buscarPorId(Long id){
+    public Orgao buscarPorId(Long id){
         return orgaoRepository.findById(id).orElse(null);
     }
 
-    public Denuncia inserirOrgao(Orgao orgao){
+    public Orgao inserirOrgao(Orgao orgao){
         orgao = orgaoRepository.save(orgao);
         return orgao;
     }
 
-    public boolean apagarDenuncia(Long id){
+    public boolean apagarOrgao(Long id){
         if(buscarPorId(id) != null){
             orgaoRepository.deleteById(id);
             return true;

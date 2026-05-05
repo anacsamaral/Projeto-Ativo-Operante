@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.entities;
+package unoeste.fipp.ativooperante.entities;
 
 import jakarta.persistence.*;
 

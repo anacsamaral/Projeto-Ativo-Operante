@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.entities;
+package unoeste.fipp.ativooperante.entities;
 
 public class Erro {
     private String mensagem;

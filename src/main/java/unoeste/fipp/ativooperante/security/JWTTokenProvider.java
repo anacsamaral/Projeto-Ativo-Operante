@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.security;
+package unoeste.fipp.ativooperante.security;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ public class JWTTokenProvider {
     static public boolean verifyToken(String token)
     {
         try {
-            Jwts.parser()
+            Jwts.parserBuilder()
                 .setSigningKey(CHAVE)
                 .build()
                 .parseClaimsJws(token).getSignature();
@@ -47,7 +47,7 @@ public class JWTTokenProvider {
     {
         Claims claims=null;
         try {
-            claims = Jwts.parser()
+            claims = Jwts.parserBuilder()
             .setSigningKey(CHAVE)
             .build()
             .parseClaimsJws(token)
@@ -61,7 +61,7 @@ public class JWTTokenProvider {
     {
         Claims claims=null;
         try {
-            claims = Jwts.parser()
+            claims = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
                     .parseClaimsJws(token)

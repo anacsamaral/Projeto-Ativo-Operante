@@ -1,11 +1,11 @@
-package unoeste.fipp.projetoativooperante.services;
+package unoeste.fipp.ativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unoeste.fipp.projetoativooperante.entities.Denuncia;
-import unoeste.fipp.projetoativooperante.entities.Feedback;
-import unoeste.fipp.projetoativooperante.repositories.DenunciaRepository;
-import unoeste.fipp.projetoativooperante.repositories.FeedbackRepository;
+import unoeste.fipp.ativooperante.entities.Denuncia;
+import unoeste.fipp.ativooperante.entities.Feedback;
+import unoeste.fipp.ativooperante.repositories.DenunciaRepository;
+import unoeste.fipp.ativooperante.repositories.FeedbackRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,23 +23,27 @@ public class DenunciaService {
         return denunciaList;
     }
 
-    public List<Denuncia> listarDenunciasCidadao(Long id){
+    public List<Denuncia> listarDenunciasPorCidadao(Long id){
         List<Denuncia> denunciaList = denunciaRepository.findAll();
         return denunciaList;
     }
 
-    public Denuncia buscarPorId(Long id){
+    public Denuncia buscarDenuncia(Long id){
         return denunciaRepository.findById(id).orElse(null);
     }
 
     public Denuncia inserirDenuncia(Denuncia novaDenuncia){
-        novaDenuncia.setData(LocalDateTime.now());
-        novaDenuncia = denunciaRepository.save(novaDenuncia);
-        return novaDenuncia;
+        try {
+            novaDenuncia.setData(LocalDateTime.now());
+            novaDenuncia = denunciaRepository.save(novaDenuncia);
+            return novaDenuncia;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean apagarDenuncia(Long id){
-        if(buscarPorId(id) != null){
+        if(buscarDenuncia(id) != null){
             denunciaRepository.deleteById(id);
             return true;
         }

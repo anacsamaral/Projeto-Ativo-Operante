@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.security;
+package unoeste.fipp.ativooperante.security;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.security;
+package unoeste.fipp.ativooperante.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

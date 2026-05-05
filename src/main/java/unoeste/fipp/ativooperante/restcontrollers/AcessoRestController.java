@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.restcontrollers;
+package unoeste.fipp.ativooperante.restcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import unoeste.fipp.projetoativooperante.entities.Erro;
-import unoeste.fipp.projetoativooperante.entities.Usuario;
-import unoeste.fipp.projetoativooperante.services.UsuarioService;
+import unoeste.fipp.ativooperante.entities.Erro;
+import unoeste.fipp.ativooperante.entities.Usuario;
+import unoeste.fipp.ativooperante.services.UsuarioService;
 
 @RestController
 @RequestMapping("apis/acesso")

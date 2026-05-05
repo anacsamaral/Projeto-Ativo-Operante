@@ -1,9 +1,9 @@
-package unoeste.fipp.projetoativooperante.services;
+package unoeste.fipp.ativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unoeste.fipp.projetoativooperante.entities.Usuario;
-import unoeste.fipp.projetoativooperante.repositories.UsuarioRepository;
+import unoeste.fipp.ativooperante.entities.Usuario;
+import unoeste.fipp.ativooperante.repositories.UsuarioRepository;
 
 import java.util.List;
 

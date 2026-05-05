@@ -1,28 +1,28 @@
-package unoeste.fipp.projetoativooperante.entities;
+package unoeste.fipp.ativooperante.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "orgaos")
-public class Orgao {
+@Table(name = "tipo")
+public class Tipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "org_id")
+    @Column(name = "tip_id")
     private Long id;
-    @Column(name = "org_nome")
+    @Column(name = "tip_nome")
     private String nome;
 
-    public Orgao() {
+    public Tipo() {
         this(0L,"");
     }
 
-    public Orgao(Long id, String nome) {
+    public Tipo(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Orgao(String nome) {
-       this(0L,nome);
+    public Tipo(String nome) {
+        this(0L, nome);
     }
 
     public Long getId() {
@@ -43,7 +43,7 @@ public class Orgao {
 
     @Override
     public String toString() {
-        return "Orgao{" +
+        return "Tipo{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';

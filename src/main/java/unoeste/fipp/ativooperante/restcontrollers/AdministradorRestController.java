@@ -1,4 +1,4 @@
-package unoeste.fipp.projetoativooperante.restcontrollers;
+package unoeste.fipp.ativooperante.restcontrollers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

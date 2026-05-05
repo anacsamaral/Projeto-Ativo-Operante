@@ -1,18 +1,17 @@
-package unoeste.fipp.projetoativooperante.restcontrollers;
+package unoeste.fipp.ativooperante.restcontrollers;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import unoeste.fipp.projetoativooperante.entities.*;
-import unoeste.fipp.projetoativooperante.security.JWTTokenProvider;
-import unoeste.fipp.projetoativooperante.services.DenunciaService;
-import unoeste.fipp.projetoativooperante.services.OrgaoService;
-import unoeste.fipp.projetoativooperante.services.TipoService;
+import org.springframework.web.bind.annotation.*;
+
+import unoeste.fipp.ativooperante.entities.*;
+import unoeste.fipp.ativooperante.security.JWTTokenProvider;
+import unoeste.fipp.ativooperante.services.DenunciaService;
+import unoeste.fipp.ativooperante.services.OrgaoService;
+import unoeste.fipp.ativooperante.services.TipoService;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class CidadaoRestController {
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        List<Denuncia> denunciaList=denunciaService.listarDenunciasCidadao(id);
+        List<Denuncia> denunciaList=denunciaService.listarDenunciasPorCidadao(id);
         return ResponseEntity.ok(denunciaList);
     }
 
@@ -62,6 +61,16 @@ public class CidadaoRestController {
     // VISUALIZAR FEEDBACKS
     @GetMapping("/listar-feedbacks")
     public ResponseEntity<Object> buscarFeedbacks(){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Feedback> feedbackList=denunciaService.listarTodosFeedbacks();
+        return ResponseEntity.ok(feedbackList);
+    }
+
+    // REGISTRAR DENUNCIA
+    @PostMapping("/registrar-denuncia")
+    public ResponseEntity<Object> registrarDenuncia(){
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
