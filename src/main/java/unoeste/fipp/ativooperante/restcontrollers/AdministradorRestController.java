@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import unoeste.fipp.ativooperante.entities.Denuncia;
-import unoeste.fipp.ativooperante.entities.Erro;
-import unoeste.fipp.ativooperante.entities.Orgao;
-import unoeste.fipp.ativooperante.entities.Tipo;
+import unoeste.fipp.ativooperante.entities.*;
 import unoeste.fipp.ativooperante.repositories.DenunciaRepository;
 import unoeste.fipp.ativooperante.security.JWTTokenProvider;
 import unoeste.fipp.ativooperante.services.DenunciaService;
+import unoeste.fipp.ativooperante.services.FeedbackService;
 import unoeste.fipp.ativooperante.services.OrgaoService;
 import unoeste.fipp.ativooperante.services.TipoService;
 
@@ -31,7 +29,8 @@ public class AdministradorRestController {
     DenunciaService denunciaService;
     @Autowired
     private DenunciaRepository denunciaRepository;
-
+    @Autowired
+    private FeedbackService feedbackService;
     // ------------------------ CRUD - TIPO DE PROBLEMA ------------------------------ //
 
     @PostMapping
@@ -123,6 +122,20 @@ public class AdministradorRestController {
             return ResponseEntity.noContent().build();
         else
             return ResponseEntity.badRequest().body(new Erro("Erro ao remover a denúncia"));
+    }
+
+    @PostMapping("/registrar-feedback/{id}")
+    public ResponseEntity<Object> registrarFeedbackDenuncia(
+            @PathVariable Long id,
+            @RequestBody Feedback feedback
+    ) {
+        try {
+            Feedback feedbackSalvo = feedbackService.salvarFeedback(id, feedback);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(feedbackSalvo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     /*
