@@ -10,7 +10,6 @@ import unoeste.fipp.ativooperante.entities.*;
 import unoeste.fipp.ativooperante.repositories.DenunciaRepository;
 import unoeste.fipp.ativooperante.security.JWTTokenProvider;
 import unoeste.fipp.ativooperante.services.DenunciaService;
-import unoeste.fipp.ativooperante.services.FeedbackService;
 import unoeste.fipp.ativooperante.services.OrgaoService;
 import unoeste.fipp.ativooperante.services.TipoService;
 
@@ -29,8 +28,7 @@ public class AdministradorRestController {
     DenunciaService denunciaService;
     @Autowired
     private DenunciaRepository denunciaRepository;
-    @Autowired
-    private FeedbackService feedbackService;
+
     // ------------------------ CRUD - TIPO DE PROBLEMA ------------------------------ //
 
     @PostMapping("/novo-tipo")
@@ -130,7 +128,7 @@ public class AdministradorRestController {
             @RequestBody Feedback feedback
     ) {
         try {
-            Feedback feedbackSalvo = feedbackService.salvarFeedback(id, feedback);
+            Feedback feedbackSalvo = denunciaService.salvarFeedback(id, feedback);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(feedbackSalvo);
         } catch (Exception e) {
