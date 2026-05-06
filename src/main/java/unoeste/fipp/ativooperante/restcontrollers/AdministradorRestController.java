@@ -31,7 +31,7 @@ public class AdministradorRestController {
 
     // ------------------------ CRUD - TIPO DE PROBLEMA ------------------------------ //
 
-    @PostMapping("/novo-tipo")
+    @PostMapping("/adicionar-tipo")
     public ResponseEntity<Object> adicionarTipo(@RequestBody Tipo tipo){
         tipo = tipoService.inserirTipo(tipo);
         if(tipo != null)
@@ -68,7 +68,7 @@ public class AdministradorRestController {
 
     // ------------------------ CRUD - ÓRGAO COMPETENTE ------------------------------ //
 
-    @PostMapping
+    @PostMapping("/adicionar-orgao")
     public ResponseEntity<Object> adicionarOrgao(@RequestBody Orgao orgao){
         orgao = orgaoService.inserirOrgao(orgao);
         if(orgao != null)
@@ -79,14 +79,14 @@ public class AdministradorRestController {
 
     @GetMapping("/listar-orgaos")
     public ResponseEntity<Object> buscarOrgaos(){
-        String token=request.getHeader("Authorization");
-        if (!JWTTokenProvider.verifyToken(token))
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        String token=request.getHeader("Authorization");
+//        if (!JWTTokenProvider.verifyToken(token))
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         List<Orgao> orgaoList=orgaoService.listarTodosOrgaos();
         return ResponseEntity.ok(orgaoList);
     }
 
-    @PutMapping
+    @PutMapping("/alterar-orgao")
     public ResponseEntity<Object> atualizarOrgao(@RequestBody Orgao orgao){
         orgao=orgaoService.inserirOrgao(orgao);
         if(orgao!=null)
@@ -95,7 +95,7 @@ public class AdministradorRestController {
             return ResponseEntity.badRequest().body(new Erro("Erro ao alterar o órgão competente"));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/excluir-orgao/{id}")
     public ResponseEntity<Object> removerOrgao(@PathVariable Long id){
         if(orgaoService.apagarOrgao(id))
             return ResponseEntity.noContent().build();
@@ -123,10 +123,7 @@ public class AdministradorRestController {
     }
 
     @PostMapping("/registrar-feedback/{id}")
-    public ResponseEntity<Object> registrarFeedbackDenuncia(
-            @PathVariable Long id,
-            @RequestBody Feedback feedback
-    ) {
+    public ResponseEntity<Object> registrarFeedbackDenuncia(@PathVariable Long id, @RequestBody Feedback feedback) {
         try {
             Feedback feedbackSalvo = denunciaService.salvarFeedback(id, feedback);
 
@@ -136,10 +133,6 @@ public class AdministradorRestController {
         }
     }
 
-    /*
-        . CRUD de tipo de problema e orgão competente -- ok
-        . Listar denúncias
-        . Excluir denúncia
-        . Registrar feedback em denúncia
-    */
+
+
 }
