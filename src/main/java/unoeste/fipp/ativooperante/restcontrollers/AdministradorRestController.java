@@ -1,7 +1,7 @@
 package unoeste.fipp.ativooperante.restcontrollers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.coyote.Response;
+//import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class AdministradorRestController {
     private FeedbackService feedbackService;
     // ------------------------ CRUD - TIPO DE PROBLEMA ------------------------------ //
 
-    @PostMapping
+    @PostMapping("/novo-tipo")
     public ResponseEntity<Object> adicionarTipo(@RequestBody Tipo tipo){
         tipo = tipoService.inserirTipo(tipo);
         if(tipo != null)
@@ -51,7 +51,7 @@ public class AdministradorRestController {
         return ResponseEntity.ok(tipoList);
     }
 
-    @PutMapping
+    @PutMapping("/alterar-tipo")
     public ResponseEntity<Object> atualizarTipo(@RequestBody Tipo tipo){
         tipo=tipoService.inserirTipo(tipo);
         if(tipo!=null)
