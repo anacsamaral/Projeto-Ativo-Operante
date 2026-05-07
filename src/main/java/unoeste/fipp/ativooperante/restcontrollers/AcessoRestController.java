@@ -22,14 +22,14 @@ public class AcessoRestController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping("/autenticar")
-    public ResponseEntity<Object> autenticarUser(String login, int senha, String nivel)
+    public ResponseEntity<Object> autenticarUser(String login, int senha)
     {
         Usuario usuarioEncontrado = usuarioRepository.findByEmail(login);
         String token="";
 
         if(usuarioEncontrado != null) {
             if (usuarioEncontrado.getSenha() == senha) {
-                token = JWTTokenProvider.getToken(login, nivel);
+                token = JWTTokenProvider.getToken(login, ""+usuarioEncontrado.getNivel());
                 return new ResponseEntity<>(token, HttpStatus.OK);
             }
         }

@@ -38,7 +38,7 @@ public class CidadaoRestController {
         if (detalhes != null && detalhes.get("nivel") != null) {
             String nivel = detalhes.get("nivel").toString();
             if (nivel.equals("1")) { // 1 = Administrador (Impede a prefeitura de usar rotas do cidadão)
-                return new ResponseEntity<>("Acesso restrito ao aplicativo do cidadão", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("Acesso restrito ao cidadão", HttpStatus.FORBIDDEN);
             }
         }
         return null;

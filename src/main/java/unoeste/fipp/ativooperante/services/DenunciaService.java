@@ -1,5 +1,6 @@
 package unoeste.fipp.ativooperante.services;
 
+import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +45,7 @@ public class DenunciaService {
 
     public Denuncia inserirDenuncia(Denuncia novaDenuncia){
         try {
-            novaDenuncia.setData(LocalDateTime.now());
+            novaDenuncia.setData(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
             novaDenuncia = denunciaRepository.save(novaDenuncia);
             return novaDenuncia;
         } catch (Exception e) {

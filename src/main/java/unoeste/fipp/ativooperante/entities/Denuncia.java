@@ -32,7 +32,7 @@ public class Denuncia {
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
 
-    @OneToOne(mappedBy = "denuncia", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "denuncia", cascade = CascadeType.ALL, orphanRemoval = true)
     private Feedback feedback;
 
     public Denuncia() {

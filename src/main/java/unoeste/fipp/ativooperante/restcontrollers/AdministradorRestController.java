@@ -43,7 +43,7 @@ public class AdministradorRestController {
         if (detalhes != null && detalhes.get("nivel") != null) {
             String nivel = detalhes.get("nivel").toString();
             if (nivel.equals("2")) { // 2 = Cidadão
-                return new ResponseEntity<>("Acesso restrito à prefeitura", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("Acesso restrito ao administrador", HttpStatus.FORBIDDEN);
             }
         }
         return null;
