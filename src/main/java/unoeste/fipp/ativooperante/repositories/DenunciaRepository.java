@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface DenunciaRepository extends JpaRepository<Denuncia,Long> {
     public List<Denuncia> findByUsuarioId(Long id);
+    public List<Denuncia> findByUrgencia(int urgencia);
 
     @Query(value = "SELECT * FROM denuncia WHERE upper(den_titulo) LIKE %:keyword%",nativeQuery = true)
     public List<Denuncia> findByKW(@Param("keyword") String keyword);

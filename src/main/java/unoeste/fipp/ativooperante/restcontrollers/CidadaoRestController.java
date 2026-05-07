@@ -46,7 +46,7 @@ public class CidadaoRestController {
 
     // ------------------------ DENÚNCIAS ------------------------------ //
 
-    @GetMapping("/listar-denuncias/{id}")
+    @GetMapping("/listar-denuncias/id/{id}")
     public ResponseEntity<Object> buscarDenunciasPorCidadao(@PathVariable Long id){
         ResponseEntity<Object> erroAcesso = validarAcessoCidadao();
         if (erroAcesso != null) return erroAcesso;
@@ -87,7 +87,7 @@ public class CidadaoRestController {
         return ResponseEntity.ok(orgaoList);
     }
 
-    @GetMapping("/listar-orgaos/{keyword}")
+    @GetMapping("/listar-orgaos/kw/{keyword}")
     public ResponseEntity<Object> buscarOrgaosPorKW(@PathVariable String keyword){
         ResponseEntity<Object> erroAcesso = validarAcessoCidadao();
         if (erroAcesso != null) return erroAcesso;
@@ -107,7 +107,7 @@ public class CidadaoRestController {
         return ResponseEntity.ok(tipoList);
     }
 
-    @GetMapping("/listar-tipos/{keyword}")
+    @GetMapping("/listar-tipos/kw/{keyword}")
     public ResponseEntity<Object> buscarTipoPorNome(@PathVariable String keyword){
         ResponseEntity<Object> erroAcesso = validarAcessoCidadao();
         if (erroAcesso != null) return erroAcesso;

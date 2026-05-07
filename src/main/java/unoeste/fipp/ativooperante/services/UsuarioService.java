@@ -30,4 +30,13 @@ public class UsuarioService {
         }
         return null;
     }
+
+    public Usuario promoverParaAdmin(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario != null && usuario.getNivel() != 1) {
+            usuario.setNivel(1);
+            return usuarioRepository.save(usuario);
+        }
+        return usuario;
+    }
 }

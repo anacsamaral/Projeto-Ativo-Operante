@@ -11,6 +11,7 @@ import unoeste.fipp.ativooperante.security.JWTTokenProvider;
 import unoeste.fipp.ativooperante.services.DenunciaService;
 import unoeste.fipp.ativooperante.services.OrgaoService;
 import unoeste.fipp.ativooperante.services.TipoService;
+import unoeste.fipp.ativooperante.services.UsuarioService;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class AdministradorRestController {
     TipoService tipoService;
     @Autowired
     OrgaoService orgaoService;
+    @Autowired
+    UsuarioService usuarioService;
     @Autowired
     DenunciaService denunciaService;
     @Autowired
@@ -43,7 +46,22 @@ public class AdministradorRestController {
                 return new ResponseEntity<>("Acesso restrito à prefeitura", HttpStatus.FORBIDDEN);
             }
         }
-        return null; // Tudo OK!
+        return null;
+    }
+
+    @PutMapping("/promover-usuario/{id}")
+    public ResponseEntity<Object> promoverUsuario(@PathVariable Long id) {
+        ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
+        if (erroAcesso != null) return erroAcesso;
+
+        Usuario atualizado = usuarioService.promoverParaAdmin(id);
+
+        if (atualizado != null) {
+            return ResponseEntity.ok(atualizado);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new Erro("Usuário não encontrado com o ID: " + id));
+        }
     }
 
     // ------------------------ TIPOS DE PROBLEMA ------------------------------ //
@@ -69,7 +87,7 @@ public class AdministradorRestController {
         return ResponseEntity.ok(tipoList);
     }
 
-    @GetMapping("/listar-tipos/{keyword}")
+    @GetMapping("/listar-tipos/kw/{keyword}")
     public ResponseEntity<Object> buscarTiposPorKW(@PathVariable String keyword){
         ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
         if (erroAcesso != null) return erroAcesso;
@@ -90,7 +108,7 @@ public class AdministradorRestController {
             return ResponseEntity.badRequest().body(new Erro("Erro ao alterar o tipo de problema"));
     }
 
-    @DeleteMapping("/excluir-tipo/{id}")
+    @DeleteMapping("/excluir-tipo/id/{id}")
     public ResponseEntity<Object> removerTipo(@PathVariable Long id){
         ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
         if (erroAcesso != null) return erroAcesso;
@@ -124,7 +142,7 @@ public class AdministradorRestController {
         return ResponseEntity.ok(orgaoList);
     }
 
-    @GetMapping("/listar-orgaos/{keyword}")
+    @GetMapping("/listar-orgaos/kw/{keyword}")
     public ResponseEntity<Object> buscarOrgaosPorKW(@PathVariable String keyword){
         ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
         if (erroAcesso != null) return erroAcesso;
@@ -145,7 +163,7 @@ public class AdministradorRestController {
             return ResponseEntity.badRequest().body(new Erro("Erro ao alterar o órgão competente"));
     }
 
-    @DeleteMapping("/excluir-orgao/{id}")
+    @DeleteMapping("/excluir-orgao/id/{id}")
     public ResponseEntity<Object> removerOrgao(@PathVariable Long id){
         ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
         if (erroAcesso != null) return erroAcesso;
@@ -167,7 +185,16 @@ public class AdministradorRestController {
         return ResponseEntity.ok(denunciaList);
     }
 
-    @GetMapping("/listar-denuncias/{keyword}")
+    @GetMapping("/listar-denuncias/urgencia/{nivelUrgencia}")
+    public ResponseEntity<Object> buscarDenunciasPorUrgencia(@PathVariable int nivelUrgencia){
+        ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
+        if (erroAcesso != null) return erroAcesso;
+
+        List<Denuncia> denunciaList = denunciaService.listarDenunciasPorUrgencia(nivelUrgencia);
+        return ResponseEntity.ok(denunciaList);
+    }
+
+    @GetMapping("/listar-denuncias/kw/{keyword}")
     public ResponseEntity<Object> buscarDenunciasPorKW(@PathVariable String keyword){
         ResponseEntity<Object> erroAcesso = validarAcessoAdmin();
         if (erroAcesso != null) return erroAcesso;

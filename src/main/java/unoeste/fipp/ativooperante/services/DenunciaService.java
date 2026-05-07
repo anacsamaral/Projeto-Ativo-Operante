@@ -28,6 +28,11 @@ public class DenunciaService {
         return denunciaList;
     }
 
+    public List<Denuncia> listarDenunciasPorUrgencia(int urgencia){
+        List<Denuncia> denunciaList = denunciaRepository.findByUrgencia(urgencia);
+        return denunciaList;
+    }
+
     public Denuncia buscarDenuncia(Long id){
         return denunciaRepository.findById(id).orElse(null);
     }

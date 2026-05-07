@@ -21,19 +21,7 @@ public class AcessoRestController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @PostMapping("/autenticar-adm")
-    public ResponseEntity<Object> autenticarAdm(String login, int senha, String nivel)
-    {
-        String token="";
-        if (login.equals("admin@pm.br") && senha == 123321) {
-            token = JWTTokenProvider.getToken(login, nivel);
-            return new ResponseEntity<>(token, HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>("ACESSO NAO PERMITIDO", HttpStatus.NOT_ACCEPTABLE);
-    }
-
-    @PostMapping("/autenticar-usuario")
+    @PostMapping("/autenticar")
     public ResponseEntity<Object> autenticarUser(String login, int senha, String nivel)
     {
         Usuario usuarioEncontrado = usuarioRepository.findByEmail(login);
@@ -47,5 +35,15 @@ public class AcessoRestController {
         }
 
         return new ResponseEntity<>("ACESSO NAO PERMITIDO", HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @PostMapping("/cadastrar-cidadao")
+    public ResponseEntity<Object> cadastrarNovoCidadao(@RequestBody Usuario usuario) {
+        Usuario novoUsuario = usuarioService.inserirUsuario(usuario);
+        if (novoUsuario != null) {
+            return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(new Erro("Este e-mail já está cadastrado no sistema."), HttpStatus.BAD_REQUEST);
+        }
     }
 }
