@@ -49,6 +49,15 @@ public class AdministradorRestController {
         return ResponseEntity.ok(tipoList);
     }
 
+    @GetMapping("/listar-tipos/{keyword}")
+    public ResponseEntity<Object> buscarTiposPorKW(@PathVariable String keyword){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Tipo> tipoList=tipoService.buscarTipoPorKW(keyword);
+        return ResponseEntity.ok(tipoList);
+    }
+
     @PutMapping("/alterar-tipo")
     public ResponseEntity<Object> atualizarTipo(@RequestBody Tipo tipo){
         tipo=tipoService.inserirTipo(tipo);
@@ -79,10 +88,19 @@ public class AdministradorRestController {
 
     @GetMapping("/listar-orgaos")
     public ResponseEntity<Object> buscarOrgaos(){
-//        String token=request.getHeader("Authorization");
-//        if (!JWTTokenProvider.verifyToken(token))
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         List<Orgao> orgaoList=orgaoService.listarTodosOrgaos();
+        return ResponseEntity.ok(orgaoList);
+    }
+
+    @GetMapping("/listar-orgaos/{keyword}")
+    public ResponseEntity<Object> buscarOrgaosPorKW(@PathVariable String keyword){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Orgao> orgaoList=orgaoService.buscarOrgaoPorKW(keyword);
         return ResponseEntity.ok(orgaoList);
     }
 
@@ -114,6 +132,15 @@ public class AdministradorRestController {
         return ResponseEntity.ok(denunciaList);
     }
 
+    @GetMapping("/listar-denuncias/{keyword}")
+    public ResponseEntity<Object> buscarDenunciasPorKW(@PathVariable String keyword){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Denuncia> denunciaList=denunciaService.buscarDenunciaPorKW(keyword);
+        return ResponseEntity.ok(denunciaList);
+    }
+
     @DeleteMapping("/excluir-denuncia/{id}")
     public ResponseEntity<Object> excluirDenuncia(@PathVariable Long id){
         if(denunciaService.apagarDenuncia(id))
@@ -121,6 +148,8 @@ public class AdministradorRestController {
         else
             return ResponseEntity.badRequest().body(new Erro("Erro ao remover a denúncia"));
     }
+
+    // ------------------------ FEEDBACK ------------------------------ //
 
     @PostMapping("/registrar-feedback/{id}")
     public ResponseEntity<Object> registrarFeedbackDenuncia(@PathVariable Long id, @RequestBody Feedback feedback) {

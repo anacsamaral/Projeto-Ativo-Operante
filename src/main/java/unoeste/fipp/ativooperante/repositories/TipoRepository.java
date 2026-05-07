@@ -10,4 +10,6 @@ import java.util.List;
 
 @Repository
 public interface TipoRepository extends JpaRepository<Tipo,Long> {
+    @Query(value = "SELECT * FROM tipo WHERE upper(tip_nome) LIKE %:keyword%",nativeQuery = true)
+    public List<Tipo> findByKW(@Param("keyword") String keyword);
 }

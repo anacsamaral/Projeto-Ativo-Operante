@@ -29,11 +29,20 @@ public class CidadaoRestController {
     TipoService tipoService;
 
     @GetMapping("/listar-denuncias/{id}")
-    public ResponseEntity<Object> buscarDenuncias(@PathVariable Long id){
+    public ResponseEntity<Object> buscarDenunciasPorCidadao(@PathVariable Long id){
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         List<Denuncia> denunciaList=denunciaService.listarDenunciasPorCidadao(id);
+        return ResponseEntity.ok(denunciaList);
+    }
+
+    @GetMapping("/listar-denuncias/{keyword}")
+    public ResponseEntity<Object> buscarDenunciasPorKW(@PathVariable String keyword){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Denuncia> denunciaList=denunciaService.buscarDenunciaPorKW(keyword);
         return ResponseEntity.ok(denunciaList);
     }
 
@@ -46,6 +55,15 @@ public class CidadaoRestController {
         return ResponseEntity.ok(orgaoList);
     }
 
+    @GetMapping("/listar-orgaos/{keyword}")
+    public ResponseEntity<Object> buscarOrgaosPorKW(@PathVariable String keyword){
+        String token=request.getHeader("Authorization");
+        if (!JWTTokenProvider.verifyToken(token))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        List<Orgao> orgaoList=orgaoService.buscarOrgaoPorKW(keyword);
+        return ResponseEntity.ok(orgaoList);
+    }
+
     @GetMapping("/listar-tipos")
     public ResponseEntity<Object> buscarTipos(){
         String token=request.getHeader("Authorization");
@@ -55,12 +73,12 @@ public class CidadaoRestController {
         return ResponseEntity.ok(tipoList);
     }
 
-    @GetMapping("/listar-tipos/{nome}")
-    public ResponseEntity<Object> buscarTipoPorNome(@PathVariable String nome){
+    @GetMapping("/listar-tipos/{keyword}")
+    public ResponseEntity<Object> buscarTipoPorNome(@PathVariable String keyword){
         String token=request.getHeader("Authorization");
         if (!JWTTokenProvider.verifyToken(token))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        List<Tipo> tipoList=tipoService.listarTodosTipos();
+        List<Tipo> tipoList=tipoService.buscarTipoPorKW(keyword);
         return ResponseEntity.ok(tipoList);
     }
 

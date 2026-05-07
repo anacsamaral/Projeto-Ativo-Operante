@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import unoeste.fipp.ativooperante.entities.Erro;
 import unoeste.fipp.ativooperante.entities.Usuario;
+import unoeste.fipp.ativooperante.repositories.UsuarioRepository;
 import unoeste.fipp.ativooperante.security.JWTTokenProvider;
 import unoeste.fipp.ativooperante.services.UsuarioService;
 
@@ -17,14 +18,14 @@ import unoeste.fipp.ativooperante.services.UsuarioService;
 public class AcessoRestController {
     @Autowired
     UsuarioService usuarioService;
-    // @PostMapping("logar")
-    // endpoint logar
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping("/autenticar-adm")
-    public ResponseEntity<Object> autenticarAdm(String login, String senha, String nivel)
+    public ResponseEntity<Object> autenticarAdm(String login, int senha, String nivel)
     {
         String token="";
-        if (login.equals("admin@pm.br") && senha.equals("123321")) {
+        if (login.equals("admin@pm.br") && senha == 123321) {
             token = JWTTokenProvider.getToken(login, nivel);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
@@ -33,14 +34,18 @@ public class AcessoRestController {
     }
 
     @PostMapping("/autenticar-usuario")
-    public ResponseEntity<Object> autenticarUser(String login, String senha, String nivel)
+    public ResponseEntity<Object> autenticarUser(String login, int senha, String nivel)
     {
+        Usuario usuarioEncontrado = usuarioRepository.findByEmail(login);
         String token="";
-        if (login.equalsIgnoreCase(login) && senha.equals(senha)) {
-            token = JWTTokenProvider.getToken(login, nivel);
-            return new ResponseEntity<>(token, HttpStatus.OK);
+
+        if(usuarioEncontrado != null) {
+            if (usuarioEncontrado.getSenha() == senha) {
+                token = JWTTokenProvider.getToken(login, nivel);
+                return new ResponseEntity<>(token, HttpStatus.OK);
+            }
         }
-        else
-            return new ResponseEntity<>("ACESSO NAO PERMITIDO", HttpStatus.NOT_ACCEPTABLE);
+
+        return new ResponseEntity<>("ACESSO NAO PERMITIDO", HttpStatus.NOT_ACCEPTABLE);
     }
 }

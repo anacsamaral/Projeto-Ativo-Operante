@@ -17,7 +17,6 @@ public class DenunciaService {
     DenunciaRepository denunciaRepository;
     @Autowired
     private FeedbackRepository feedbackRepository;
-    // save, delete, findOne, findAll - PARA TODOS OS SERVICES
 
     public List<Denuncia> listarTodasDenuncias(){
         List<Denuncia> denunciaList = denunciaRepository.findAll();
@@ -31,6 +30,11 @@ public class DenunciaService {
 
     public Denuncia buscarDenuncia(Long id){
         return denunciaRepository.findById(id).orElse(null);
+    }
+
+    public List<Denuncia> buscarDenunciaPorKW(String keyword){
+        List <Denuncia> denunciaList=denunciaRepository.findByKW(keyword.toUpperCase());
+        return denunciaList;
     }
 
     public Denuncia inserirDenuncia(Denuncia novaDenuncia){

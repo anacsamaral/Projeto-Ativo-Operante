@@ -22,6 +22,11 @@ public class TipoService {
         return tipoRepository.findById(id).orElse(null);
     }
 
+    public List<Tipo> buscarTipoPorKW(String keyword){
+        List <Tipo> tipoList=tipoRepository.findByKW(keyword.toUpperCase());
+        return tipoList;
+    }
+
     public Tipo inserirTipo(Tipo tipo){
         try {
             tipo = tipoRepository.save(tipo);

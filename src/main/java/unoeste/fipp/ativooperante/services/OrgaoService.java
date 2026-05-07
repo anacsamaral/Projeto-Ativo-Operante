@@ -2,6 +2,7 @@ package unoeste.fipp.ativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import unoeste.fipp.ativooperante.entities.Denuncia;
 import unoeste.fipp.ativooperante.entities.Orgao;
 import unoeste.fipp.ativooperante.repositories.OrgaoRepository;
 
@@ -19,6 +20,11 @@ public class OrgaoService {
 
     public Orgao buscarPorId(Long id){
         return orgaoRepository.findById(id).orElse(null);
+    }
+
+    public List<Orgao> buscarOrgaoPorKW(String keyword){
+        List <Orgao> orgaoList=orgaoRepository.findByKW(keyword.toUpperCase());
+        return orgaoList;
     }
 
     public Orgao inserirOrgao(Orgao orgao){
