@@ -2,7 +2,6 @@ package unoeste.fipp.ativooperante.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unoeste.fipp.ativooperante.entities.Denuncia;
 import unoeste.fipp.ativooperante.entities.Orgao;
 import unoeste.fipp.ativooperante.repositories.OrgaoRepository;
 

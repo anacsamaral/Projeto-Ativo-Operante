@@ -32,8 +32,7 @@ public class Denuncia {
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fee_id")
+    @OneToOne(mappedBy = "denuncia", fetch = FetchType.LAZY)
     private Feedback feedback;
 
     public Denuncia() {

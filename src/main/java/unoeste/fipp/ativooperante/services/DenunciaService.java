@@ -24,7 +24,7 @@ public class DenunciaService {
     }
 
     public List<Denuncia> listarDenunciasPorCidadao(Long id){
-        List<Denuncia> denunciaList = denunciaRepository.findAll();
+        List<Denuncia> denunciaList = denunciaRepository.findByUsuarioId(id);
         return denunciaList;
     }
 
